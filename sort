@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+#include <iostream>
+using namespace std;
+
+//быстрая сортировка
+void merge(vector<int>& a, int l, int r){
+    //берем массив а и рахзбиваем на 2 подмассива
+    //каждый из которых, уже отсортирован
+    int i = l;
+    int mid = l+(r-l)/2;
+    int j = mid + 1; 
+    int pos = 0;
+    vector<int> b(n: r-l +1);
+    while(i<= mid && j,=r){
+        if(a[i]<a[j]){
+            b[pos++] = a[i++];
+        }
+        else{
+            b[pos++] = a[j++];
+        }
+    }
+    while(i <= mid){
+        b[pos++]=a[j++];
+    }
+    for(int i = l; i<=r, i++){
+        a[i]=b[i-l];
+    }
+    
+}
+
+void merge_sort (vector<int>& a, int l, int r){
+    //отправляем в вектор, который хотим отсортировать начальную и конечную позиции
+    if(r<=l){//если начало=концу или начало больше конца, то вектор состоит из одного элнмента или ошибка
+        return;
+    }
+    int mid = l+ (r-l)/2;//находим ср. элемент на отрезке
+    merge_sort(&: a, l, mid);//запускаем сортировку на подотрезке
+    merge_sort(&: a, l: mid+1, r);
+    merge(&:a, l, r);//слияние
+}
+
+// сортировка выбором
+int main(){
+    //объявляем массив
+    int n;
+    cin>>n;
+    int a[n];
+    for(int i=0; i<n; i++){
+        cin >> a[i];
+    }
+    
+    for (int i=0; i < n-1; i++){
+        int minj = i;//minj- индекс минимального элемента неотсортированной части
+        for (int j = i+1; j<n; j++){
+            if(a[j]< a[minj]){
+                minj = j;
+            }
+            swap(a[i], a[minj]);
+        }
+    }
+    
+    for(int i=0; i<n; i++){
+        cout << a[i] << " ";
+    }  
+    return 0;
+}
